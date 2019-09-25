@@ -1,5 +1,17 @@
 #include "CMatrix3.h"
 
+/*Author: Ahmad Shuaib Dorani
+Student ID: 00290332T
+Date: 25/09/2019
+******************************/
+
+
+/***********************
+* Name of the Function: CMatrix3 - Constructor
+* @parameter: 
+* @return:
+********************/
+
 CMatrix3::CMatrix3()
 {
 	for (int i = 0; i < 3; i++)
@@ -15,16 +27,31 @@ CMatrix3::~CMatrix3()
 {
 }
 
+/***********************
+* Name of the Function: SetElement - Sets an element of matrix
+* @parameter: int _iX and _iY as the indexes of the element and float _fValue as the value to be set
+* @return: nothing
+********************/
 void CMatrix3::SetElement(int _iX, int _iY, float _fValue)
 {
 	m_fMatrix[_iX][_iY] = _fValue;
 }
 
+/***********************
+* Name of the Function: GetElement - Gets an element of matrix
+* @parameter: int _iX and _iY as the indexes of the element 
+* @return: float value of element at index
+********************/
 float CMatrix3::GetElement(int _iX, int _iY) const
 {
 	return m_fMatrix[_iX][_iY];
 }
 
+/***********************
+* Name of the Function: Idetity - Create an identity matrix
+* @parameter: CMatrix3 _rResult as the matrix to be used as identity 
+* @return: _rResult
+********************/
 CMatrix3 & CMatrix3::Identity(CMatrix3 & _rResult)
 {
 	//1st row
