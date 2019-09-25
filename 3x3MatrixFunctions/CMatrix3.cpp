@@ -8,7 +8,7 @@ Date: 25/09/2019
 
 /***********************
 * Name of the Function: CMatrix3 - Constructor
-* @parameter: 
+* @parameter:
 * @return:
 ********************/
 
@@ -39,7 +39,7 @@ void CMatrix3::SetElement(int _iX, int _iY, float _fValue)
 
 /***********************
 * Name of the Function: GetElement - Gets an element of matrix
-* @parameter: int _iX and _iY as the indexes of the element 
+* @parameter: int _iX and _iY as the indexes of the element
 * @return: float value of element at index
 ********************/
 float CMatrix3::GetElement(int _iX, int _iY) const
@@ -49,7 +49,7 @@ float CMatrix3::GetElement(int _iX, int _iY) const
 
 /***********************
 * Name of the Function: Idetity - Create an identity matrix
-* @parameter: CMatrix3 _rResult as the matrix to be used as identity 
+* @parameter: CMatrix3 _rResult as the matrix to be used as identity
 * @return: _rResult
 ********************/
 CMatrix3 & CMatrix3::Identity(CMatrix3 & _rResult)
@@ -86,15 +86,16 @@ CMatrix3 & CMatrix3::Zero(CMatrix3 & _rResult)
 
 bool CMatrix3::Equals(const CMatrix3 & _rA, const CMatrix3 & _rB)
 {
-	bool result = false;
+	bool result = true;
 
 	for (int i = 0; i < 3; i++)
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			if (_rA.GetElement(i,j) == _rB.GetElement(i,j))
+			if (_rA.GetElement(i, j) != _rB.GetElement(i, j))
 			{
-				result = true;
+				result = false;
+				break;
 			}
 		}
 	}
@@ -157,7 +158,7 @@ CMatrix3 & CMatrix3::Multiply(const CMatrix3 & _rA, const CMatrix3 & _rB, CMatri
 {
 	float matrixAEl;
 	float matrixBEl;
-	float matMul = 0.0f;
+	float matMul;
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -167,6 +168,7 @@ CMatrix3 & CMatrix3::Multiply(const CMatrix3 & _rA, const CMatrix3 & _rB, CMatri
 			{
 				matrixAEl = _rA.GetElement(i, k);
 				matrixBEl = _rB.GetElement(k, j);
+				matMul = _rResult.GetElement(i, j);
 
 				matMul += matrixAEl * matrixBEl;
 				_rResult.SetElement(i, j, matMul);
@@ -194,10 +196,10 @@ void CMatrix3::displayMatrix()
 {
 	for (int i = 0; i < 3; i++)
 	{
-		cout << "\n";
 		for (int j = 0; j < 3; j++)
 		{
 			cout << m_fMatrix[i][j] << " ";
 		}
+		cout << "\n";
 	}
 }
