@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-	srand(time(0));
+	srand((unsigned int)time(NULL));
 	cout << "Setting up zero matrix:\n";
 	CMatrix3 matrix;
 	matrix.displayMatrix();
@@ -31,7 +31,7 @@ int main()
 		
 	}
 
-	cout << "\Making Matrix 1 a zero matrix:\n";
+	cout << "\nMaking Matrix 1 a zero matrix:\n";
 	matrix = matrix.Zero(matrix);
 	cout << "\nMatrix 1:\n";
 	matrix.displayMatrix();
@@ -54,7 +54,7 @@ int main()
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			add1.SetElement(i, j, rand() % 20);
+			add1.SetElement(i, j, float(rand() % 20));
 		}
 	}
 
@@ -62,7 +62,7 @@ int main()
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			add2.SetElement(i, j, (rand() % 20)*(-1));
+			add2.SetElement(i, j, float((rand() % 20)*(-1)));
 		}
 	}
 

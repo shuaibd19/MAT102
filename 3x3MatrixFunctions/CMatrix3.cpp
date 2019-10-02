@@ -104,17 +104,11 @@ bool CMatrix3::Equals(const CMatrix3 & _rA, const CMatrix3 & _rB)
 
 CMatrix3 & CMatrix3::Add(const CMatrix3 & _rA, const CMatrix3 & _rB, CMatrix3 & _rResult)
 {
-	float matrixAEl;
-	float matrixBEl;
-	float sum;
 	for (int i = 0; i < 3; i++)
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			matrixAEl = _rA.GetElement(i, j);
-			matrixBEl = _rB.GetElement(i, j);
-			sum = matrixAEl + matrixBEl;
-			_rResult.SetElement(i, j, sum);
+			_rResult.m_fMatrix[i][j] = _rA.m_fMatrix[i][j] + _rB.m_fMatrix[i][j];
 		}
 	}
 	return _rResult;
@@ -122,17 +116,11 @@ CMatrix3 & CMatrix3::Add(const CMatrix3 & _rA, const CMatrix3 & _rB, CMatrix3 & 
 
 CMatrix3 & CMatrix3::Subtract(const CMatrix3 & _rA, const CMatrix3 & _rB, CMatrix3 & _rResult)
 {
-	float matrixAEl;
-	float matrixBEl;
-	float difference;
 	for (int i = 0; i < 3; i++)
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			matrixAEl = _rA.GetElement(i, j);
-			matrixBEl = _rB.GetElement(i, j);
-			difference = matrixAEl - matrixBEl;
-			_rResult.SetElement(i, j, difference);
+			_rResult.m_fMatrix[i][j] = _rA.m_fMatrix[i][j] - _rB.m_fMatrix[i][j];
 		}
 	}
 	return _rResult;
@@ -140,15 +128,11 @@ CMatrix3 & CMatrix3::Subtract(const CMatrix3 & _rA, const CMatrix3 & _rB, CMatri
 
 CMatrix3 & CMatrix3::Multiply(float _fScalar, const CMatrix3 & _rA, CMatrix3 & _rResult)
 {
-	float matrixAEl;
-	float quotient;
 	for (int i = 0; i < 3; i++)
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			matrixAEl = _rA.GetElement(i, j);
-			quotient = _fScalar * matrixAEl;
-			_rResult.SetElement(i, j, quotient);
+			_rResult.m_fMatrix[i][j] = _rA.m_fMatrix[i][j] * _fScalar;
 		}
 	}
 	return _rResult;
@@ -156,9 +140,6 @@ CMatrix3 & CMatrix3::Multiply(float _fScalar, const CMatrix3 & _rA, CMatrix3 & _
 
 CMatrix3 & CMatrix3::Multiply(const CMatrix3 & _rA, const CMatrix3 & _rB, CMatrix3 & _rResult)
 {
-	float matrixAEl;
-	float matrixBEl;
-	float matMul;
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -166,12 +147,7 @@ CMatrix3 & CMatrix3::Multiply(const CMatrix3 & _rA, const CMatrix3 & _rB, CMatri
 		{
 			for (int k = 0; k < 3; k++)
 			{
-				matrixAEl = _rA.GetElement(i, k);
-				matrixBEl = _rB.GetElement(k, j);
-				matMul = _rResult.GetElement(i, j);
-
-				matMul += matrixAEl * matrixBEl;
-				_rResult.SetElement(i, j, matMul);
+				_rResult.m_fMatrix[i][j] += _rA.m_fMatrix[i][k] * _rB.m_fMatrix[k][j];
 			}
 		}
 	}
@@ -180,13 +156,11 @@ CMatrix3 & CMatrix3::Multiply(const CMatrix3 & _rA, const CMatrix3 & _rB, CMatri
 
 CMatrix3 & CMatrix3::Transpose(const CMatrix3 & _rA, CMatrix3 & _rResult)
 {
-	float matrixAEl;
 	for (int i = 0; i < 3; i++)
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			matrixAEl = _rA.GetElement(i, j);
-			_rResult.SetElement(j, i, matrixAEl);
+			_rResult.m_fMatrix[i][j] = _rA.m_fMatrix[j][i];
 		}
 	}
 	return _rResult;
