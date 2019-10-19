@@ -166,6 +166,69 @@ CMatrix3 & CMatrix3::Transpose(const CMatrix3 & _rA, CMatrix3 & _rResult)
 	return _rResult;
 }
 
+MVector2 & CMatrix3::ScaleVector(float _scaleX, float _scaleY, MVector2 & _vec, MVector2 & _resultntV)
+{
+	CMatrix3 scaleMatrix;
+	scaleMatrix.Identity(scaleMatrix);
+	scaleMatrix.SetElement(0, 0, _scaleX);
+	scaleMatrix.SetElement(1, 1, _scaleY);
+
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			_resultntV.matrixForm[i] += (scaleMatrix.m_fMatrix[i][j] * _vec.matrixForm[i]);
+		}
+	}
+
+	return _resultntV;
+}
+
+
+MVector2 & CMatrix3::TranslateVector(float _transX, float _transY, MVector2 & _vec, MVector2 & _resultntV)
+{
+	CMatrix3 transMatrix;
+	transMatrix.Identity(transMatrix);
+	transMatrix.SetElement(0, 2, _transX);
+	transMatrix.SetElement(1, 2, _transY);
+
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			_resultntV.matrixForm[i] += (transMatrix.m_fMatrix[i][j] * _vec.matrixForm[i]);
+		}
+	}
+
+	return _resultntV;
+}
+
+MVector2 & CMatrix3::RotateVector(float _angle, MVector2 & _vec, MVector2 & _resultntV)
+{
+	CMatrix3 rotateMatrix;
+	rotateMatrix.Identity(rotateMatrix);
+	rotateMatrix.SetElement(0, 0, cos(toRadians(_angle)));
+	rotateMatrix.SetElement(0, 1, -1*(sin(toRadians(_angle))));
+	rotateMatrix.SetElement(1, 0, sin(toRadians(_angle)));
+	rotateMatrix.SetElement(0, 1, -1 * (cos(toRadians(_angle))));
+
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			_resultntV.matrixForm[i] += (rotateMatrix.m_fMatrix[i][j] * _vec.matrixForm[i]);
+		}
+	}
+	
+	return _resultntV;
+}
+
+float CMatrix3::toRadians(float angleD)
+{
+	float x = angleD * 3.14159 / 180;
+	return x;
+}
+
 void CMatrix3::displayMatrix()
 {
 	for (int i = 0; i < 3; i++)
